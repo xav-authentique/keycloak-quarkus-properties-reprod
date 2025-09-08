@@ -73,11 +73,6 @@ services:
       # If this label is not set Spring will assume, based on the image name, that a DataSourceConfiguration must be
       # created for this container, see ConnectionNamePredicate#getActual
       org.springframework.boot.service-connection: keycloak-db
-    healthcheck:
-      test: [ "CMD-SHELL", "mysql --user=root --password=$$MYSQL_ROOT_PASSWORD -e 'USE keycloak; SHOW TABLES LIKE \"INIT_DONE_LOL\";' | grep INIT_DONE_LOL" ]
-      interval: 5s
-      timeout: 1s
-      retries: 50
   kc:
     build:
       context: ./keycloak
