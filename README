@@ -1,0 +1,11 @@
+You can execute `mvn clean verify` for the build.
+After that you can run `docker compose up` in the docker folder.
+
+For the first start, the kc container will probably crash because mysql is still running the init scripts, so for the first run you have to wait until you see this log:
+kc-db-1          | 2025-09-08 10:00:54+00:00 [Note] [Entrypoint]: MySQL init process done. Ready for start up.
+
+After that you can kill the containers and restart and everything should work.
+You can navigate to this url and login with test@localhost with any password to trigger the bug:
+http://localhost:8091/auth/realms/reprod/protocol/openid-connect/auth?client_id=account-console&redirect_uri=http%3A%2F%2Flocalhost%3A8091%2Fauth%2Frealms%2Freprod%2Faccount&state=5d29c20e-fae2-4ff2-9527-a73933cc443d&response_type=code&code_challenge=wa7SNl2gzwTejvJVwRZHBku5izsX5vYY9_Etyn03gos&code_challenge_method=S256
+
+In the logs you'll see that the query in the userstore is being executed by the H2 database instead of the mysql database.
