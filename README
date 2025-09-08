@@ -1,4 +1,4 @@
-You can execute `mvn clean verify` for the build.
+You can execute `mvn clean verify -P base` for the build.
 After that you can run `docker compose up` in the docker folder.
 
 For the first start, the kc container will probably crash because mysql is still running the init scripts, so for the first run you have to wait until you see this log:
